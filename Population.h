@@ -120,15 +120,15 @@ double Population<T>::mean()
 template<typename T>
 double Population<T>::std_dev()
 {
-  T sum = 0;
-  T sqrsum = 0;
+  double sum = 0;
+  double sqrsum = 0;
   unsigned samples = entities.size();
   for (unsigned i = 0; i < samples; i++)
   {
-    sum += entities[i];
-    sqrsum += (entities[i]*entities[i]);
+    sum += (double)entities[i];
+    sqrsum += (double)(entities[i]*entities[i]);
   }
-  return sqrt(sqrsum/samples-pow((double)sum/samples,2));
+  return sqrt(sqrsum/samples-pow(sum/samples,2));
 }
 
 template<typename T>
