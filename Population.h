@@ -7,22 +7,23 @@
 // 
 //  Last edited by: DAC on: 6/15/12.
 //
-//  This objects represents a statistical population of numerical objects (int, char,
-//  double, etc). There is currently no check for type compatibility.
+//  This objects represents a statistical population of numerical values represented as
+//  double precision values. This can be used with any numerical data type since there is
+//  no loss of data when converting to a double.
 //
 
 #ifndef CSLIBRARY_CPP_STATISTICS_POPULATION_H
 #define CSLIBRARY_CPP_STATISTICS_POPULATION_H
 
 #include <algorithm>
-#include <cmath>
 #include <vector>
+#include <cmath>
 
 using std::vector;
 
-template<typename T>
 class Population
 {
+
 public:
 
   //
@@ -30,16 +31,16 @@ public:
   // 
   
   Population();
-  explicit Population(T item);
-  Population(int size, T inital);
-  Population(int size, T* values);
+  explicit Population(double item);
+  Population(int size, double inital);
+  Population(int size, double* values);
   
   // 
   // Public Member Functions
   //
   
   // Adds and entity to the population.
-  void add(T entity);
+  void add(double entity);
   
   // Returns the number of samples making up the population.
   int samples();
@@ -51,113 +52,15 @@ public:
   double std_dev();
   
   // Returns the percentile specified by |percent| (double from 0.01 to 1.0). 
-  T percentile(double percent);
+  double percentile(double percent);
   
   // Returns the population element at the specified index.
-  T get_element(unsigned index);
+  double get_element(unsigned index);
   
 private:
   
-  vector<T> entities;
+  vector<double> entities;
   
 };
-
-/******************************* Constructors *********************************/
-
-template<typename T>
-Population<T>::Population() 
-{  
-    vector<T> v;
-    entities = v;
-}
-
-template<typename T>
-Population<T>::Population(T item) 
-{  
-    vector<T> v(1, item);
-    entities = v; 
-}
-
-template<typename T>
-Population<T>::Population(int size, T inital) 
-{  
-    vector<T> v(size,inital);
-    entities = v;
-}
-
-template<typename T>
-Population<T>::Population(int size, T* values) 
-{  
-    vector<T> v(values, values + size);
-    entities = v;
-}
-
-/*********************** Public Member Functions ******************************/
-
-template<typename T>
-void Population<T>::add(T entity)
-{
-  entities.push_back(entity);
-}
-
-template<typename T>
-int Population<T>::samples()
-{
-  return (int)entities.size();
-}
-
-template<typename T>
-double Population<T>::mean()
-{
-  double mean = 0;
-  for (unsigned i = 0; i < entities.size(); i++)
-  {
-    mean += entities[i];
-  }
-  return mean/entities.size();
-}
-
-template<typename T>
-double Population<T>::std_dev()
-{
-  double sum = 0;
-  double sqrsum = 0;
-  unsigned samples = entities.size();
-  for (unsigned i = 0; i < samples; i++)
-  {
-    sum += (double)entities[i];
-    sqrsum += (double)(entities[i]*entities[i]);
-  }
-  return sqrt(sqrsum/samples-pow(sum/samples,2));
-}
-
-template<typename T>
-T Population<T>::percentile(double percent)
-{
-  // Ensure the desired percentile makes sense.
-  if(percent < 0.01)
-    percent = 0.01;
-  if(percent > 1.0)
-    percent = 1.0;
-  
-  // Create a copy of the population and sort it in ascending order.
-  vector<T> copy(entities);
-  sort(copy.begin(), copy.end());
-  
-  // Determine the desired percentile's index.
-  int index = static_cast<int>(entities.size()*percent-1);
-  
-  // Return the desired percentile.
-  return copy[index];  
-}
-
-template<typename T>
-T Population<T>::get_element(unsigned index)
-{
-  if (index > entities.size())
-    return 0;
-    
-  return entities[index];
-}
 
 #endif

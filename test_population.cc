@@ -3,6 +3,7 @@
 #include "Population.h"
 #include <cstdlib>
 #include <iostream>
+
 using namespace std;
 
 #define ASIZE 10
@@ -11,8 +12,9 @@ using namespace std;
 int main () 
 {
   //int array[] = { 1,2,3,4,5,6,7,8,9,10 };
-  int array[] = { 2,2,2,2,2,2,2,2,2,2 };
-  Population<int> pop1(ASIZE, array);
+  double array[] = { 2,2,2,2,2,2,2,2,2,2 };
+  
+  Population pop1(ASIZE, array);
   cout << "Population #1: ";
   for(int i = 0; i < pop1.samples(); i++)
   {
@@ -24,7 +26,7 @@ int main ()
   cout << "Population #1 std. dev. = " << pop1.std_dev() << endl;
   cout << "Population #1 90th percentile = " << pop1.percentile(0.9) << endl;
   
-  Population<int> pop2;
+  Population pop2;
   for(int i = 1; i <= ASIZE; i++)
   {
     pop2.add(i);
@@ -40,7 +42,7 @@ int main ()
   cout << "Population #2 std. dev. = " << pop2.std_dev() << endl;
   cout << "Population #2 90th percentile = " << pop2.percentile(0.9) << endl;
   
-  Population<double> pop3(3.3);
+  Population pop3(3.3);
   cout << "Population #3: ";
   for(int i = 0; i < pop3.samples(); i++)
   {
@@ -48,7 +50,7 @@ int main ()
   }
   cout << endl;
   
-  Population<int> pop4;
+  Population pop4;
   srand ( time(NULL) ); /* initialize random seed: */
   for(int i = 1; i <= 100; i++)
   {
