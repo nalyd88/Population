@@ -48,6 +48,9 @@ public:
   // Returns the mean value of the population.
   double mean();
   
+  // Returns the median value of the population.
+  double median();
+  
   // Returns the standard deviation of the population.
   double std_dev();
   

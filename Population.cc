@@ -19,7 +19,7 @@ using namespace std;
 
 Population::Population() 
 {  
-    vector<double> v(100); // Start with space for 100 values.
+    vector<double> v;
     entities = v;
 }
 
@@ -61,6 +61,40 @@ double Population::mean()
     mean += entities[i];
   }
   return mean/entities.size();
+}
+
+double Population::median()
+{
+  
+  // Do a couple checks first.
+  
+  if (entities.size() < 1)
+    return 0;
+  
+  if (entities.size() < 2)
+    return entities[0];
+
+  // Create a copy of the population and sort it in ascending order.
+  vector<double> copy(entities);
+  sort(copy.begin(), copy.end());
+  double median;
+  
+  // If the population has an even number of entities average the middle two values;
+  // otherwise, return the entity in the middle.
+  if (entities.size() % 2 == 0)
+  {
+    int index1 = static_cast<int>(entities.size()/2);
+    median = (copy[index1] + copy[index1 - 1]) / 2;
+  }
+  else
+  {
+    // Determine the median index.
+    int index = static_cast<int>(entities.size()/2);
+    median = copy[index];
+  }
+  
+  // Return the desired percentile.
+  return median;  
 }
 
 double Population::std_dev()

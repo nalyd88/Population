@@ -41,6 +41,7 @@ int main ()
   cout << "Population #2 mean = " << pop2.mean() << endl;
   cout << "Population #2 std. dev. = " << pop2.std_dev() << endl;
   cout << "Population #2 90th percentile = " << pop2.percentile(0.9) << endl;
+  cout << "Population #2 median = " << pop2.median() << endl;
   
   Population pop3(3.3);
   cout << "Population #3: ";
@@ -67,6 +68,24 @@ int main ()
   cout << "Population #4 std. dev. = " << pop4.std_dev() << endl;
   cout << "Population #4 90th percentile = " << pop4.percentile(0.9) << endl;
   
+  Population pop5;
+  int pop_size_5 = 237;
+  srand ( time(NULL) ); /* initialize random seed: */
+  for(int i = 1; i <= pop_size_5; i++)
+  {
+    pop5.add(rand() % 100 + 1);
+  } 
+  cout << "Population #5: ";
+  for(int i = 0; i < pop5.samples(); i++)
+  {
+    cout << pop5.get_element(i) << " ";
+  }
+  cout << endl;
+  cout << "Population #5 samples = " << pop5.samples() << endl;
+  cout << "Population #5 mean = " << pop5.mean() << endl;
+  cout << "Population #5 std. dev. = " << pop5.std_dev() << endl;
+  cout << "Population #5 90th percentile = " << pop5.percentile(0.9) << endl;
+  cout << "Population #5 median = " << pop5.median() << endl;
   
   return 0;
 }
