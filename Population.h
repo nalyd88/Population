@@ -42,6 +42,8 @@
 
 using std::vector;
 
+namespace population {
+
 class Population
 {
 
@@ -72,6 +74,10 @@ public:
   // Returns the median value of the population.
   double median();
   
+  // Returns the mode of the population. Populations may have multiple modes, therefore
+  // the returned value is a vector.
+  vector<double> mode();
+  
   // Returns the standard deviation of the population.
   double std_dev();
   
@@ -85,6 +91,8 @@ private:
   
   vector<double> entities;
   
-};
+}; // end class header
+
+}  // end namespace
 
 #endif

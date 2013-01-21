@@ -36,6 +36,9 @@
 #include "Population.h"
 using namespace std;
 
+namespace population
+{
+
 /******************************* Constructors *********************************/
 
 Population::Population() 
@@ -86,12 +89,9 @@ double Population::mean()
 
 double Population::median()
 {
-  
   // Do a couple checks first.
-  
   if (entities.size() < 1)
     return 0;
-  
   if (entities.size() < 2)
     return entities[0];
 
@@ -116,6 +116,55 @@ double Population::median()
   
   // Return the median value.
   return median;  
+}
+
+vector<double> Population::mode()
+{ 
+  // A population could have multiple modes, so return a vector.
+  vector<double> modes;
+  
+  // Do a couple checks first.
+  if (entities.size() < 1)
+    return modes; // Empty vector
+  if (entities.size() < 2)
+    return entities; // One element vector - so it is the return value...
+
+  // Create a copy of the population and sort it in ascending order.
+  vector<double> copy(entities);
+  sort(copy.begin(), copy.end());
+  
+  int streak = 0;
+  int count = 0;
+  double value = copy[0]; // Initialize to first item.
+  for (unsigned int i = 0; i < copy.size(); i++)
+  {
+    if (value == copy[i])
+    {
+      count++;
+    }
+    else
+    {
+      // New value found so start over counting.
+      value = copy[i];
+      count = 1;
+    }
+    
+    // Possibly found multiple modes.
+    if (count == streak)
+      modes.push_back(value);
+    
+    if (count > streak)
+    {
+      // So this value has been found more than any others. Start over with modes.
+      modes.clear();
+      modes.push_back(value);
+      streak = count;
+    }
+      
+  }
+  
+  // Return the median value.
+  return modes;  
 }
 
 double Population::std_dev()
@@ -157,3 +206,5 @@ double Population::get_element(unsigned index)
     
   return entities[index];
 }
+
+} // end namespace

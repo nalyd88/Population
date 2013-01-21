@@ -5,6 +5,7 @@
 #include <iostream>
 
 using namespace std;
+using population::Population;
 
 #define ASIZE 10
 
@@ -86,6 +87,22 @@ int main ()
   cout << "Population #5 std. dev. = " << pop5.std_dev() << endl;
   cout << "Population #5 90th percentile = " << pop5.percentile(0.9) << endl;
   cout << "Population #5 median = " << pop5.median() << endl;
+  cout << "Population #5 mode = " << pop5.mode()[0] << endl;
+ 
   
+  double array6[] = { 2,7,2,2,2,4,4,9,4,4 };
+  Population pop6(ASIZE, array6);
+  cout << "Population #6: ";
+  for(int i = 0; i < pop6.samples(); i++)
+  {
+    cout << pop6.get_element(i) << " ";
+  }
+  cout << endl;
+  vector<double> modes = pop6.mode();
+  for(unsigned i = 0; i < modes.size(); i++)
+  {
+    cout << "Population #6 mode = " << modes[i] << endl;
+  }
+   
   return 0;
 }
