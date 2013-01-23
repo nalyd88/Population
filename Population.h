@@ -1,6 +1,6 @@
 //
 //  Population.h
-//  CSLibrary
+//  Population
 //
 //  Created by Dylan Crocker on 6/15/12.
 //  Copyright 2012 Creative Solutions. All rights reserved.
@@ -79,13 +79,20 @@ public:
   vector<double> mode();
   
   // Returns the standard deviation of the population.
-  double std_dev();
+  double stddev();
   
   // Returns the percentile specified by |percent| (double from 0.01 to 1.0). 
   double percentile(double percent);
   
+  // Returns true if the population can be considered to be normally distributed within
+  // the specified tolerance.
+  // bool isnorm(double error);
+  
   // Returns the population element at the specified index.
   double get_element(unsigned index);
+  
+  // Remove an element at the specified index.
+  void remove_element(unsigned index);
   
 private:
   

@@ -1,6 +1,6 @@
 //
-//  Population.cpp
-//  CSLibrary
+//  Population.cc
+//  Population
 //
 //  Created by Dylan Crocker on 1/19/13.
 //  Copyright 2012 Creative Solutions. All rights reserved.
@@ -34,6 +34,7 @@
 //
 
 #include "Population.h"
+#include <math.h>
 using namespace std;
 
 namespace population
@@ -160,14 +161,13 @@ vector<double> Population::mode()
       modes.push_back(value);
       streak = count;
     }
-      
   }
   
-  // Return the median value.
+  // Return the modes.
   return modes;  
 }
 
-double Population::std_dev()
+double Population::stddev()
 {
   double sum = 0;
   double sqrsum = 0;
@@ -205,6 +205,11 @@ double Population::get_element(unsigned index)
     return 0;
     
   return entities[index];
+}
+
+void Population::remove_element(unsigned index)
+{
+  entities.erase (entities.begin() + index);
 }
 
 } // end namespace

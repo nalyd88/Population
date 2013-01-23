@@ -24,7 +24,7 @@ int main ()
   cout << endl;
   cout << "Population #1 samples = " << pop1.samples() << endl;
   cout << "Population #1 mean = " << pop1.mean() << endl;
-  cout << "Population #1 std. dev. = " << pop1.std_dev() << endl;
+  cout << "Population #1 std. dev. = " << pop1.stddev() << endl;
   cout << "Population #1 90th percentile = " << pop1.percentile(0.9) << endl;
   
   Population pop2;
@@ -40,9 +40,17 @@ int main ()
   cout << endl;
   cout << "Population #2 samples = " << pop2.samples() << endl;
   cout << "Population #2 mean = " << pop2.mean() << endl;
-  cout << "Population #2 std. dev. = " << pop2.std_dev() << endl;
+  cout << "Population #2 std. dev. = " << pop2.stddev() << endl;
   cout << "Population #2 90th percentile = " << pop2.percentile(0.9) << endl;
   cout << "Population #2 median = " << pop2.median() << endl;
+  
+  pop2.remove_element(3);
+  cout << "Population #2(missing one): ";
+  for(int i = 0; i < pop2.samples(); i++)
+  {
+    cout << pop2.get_element(i) << " ";
+  }
+  cout << endl;
   
   Population pop3(3.3);
   cout << "Population #3: ";
@@ -66,7 +74,7 @@ int main ()
   cout << endl;
   cout << "Population #4 samples = " << pop4.samples() << endl;
   cout << "Population #4 mean = " << pop4.mean() << endl;
-  cout << "Population #4 std. dev. = " << pop4.std_dev() << endl;
+  cout << "Population #4 std. dev. = " << pop4.stddev() << endl;
   cout << "Population #4 90th percentile = " << pop4.percentile(0.9) << endl;
   
   Population pop5;
@@ -84,7 +92,7 @@ int main ()
   cout << endl;
   cout << "Population #5 samples = " << pop5.samples() << endl;
   cout << "Population #5 mean = " << pop5.mean() << endl;
-  cout << "Population #5 std. dev. = " << pop5.std_dev() << endl;
+  cout << "Population #5 std. dev. = " << pop5.stddev() << endl;
   cout << "Population #5 90th percentile = " << pop5.percentile(0.9) << endl;
   cout << "Population #5 median = " << pop5.median() << endl;
   cout << "Population #5 mode = " << pop5.mode()[0] << endl;
